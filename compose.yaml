@@ -21,6 +21,7 @@ services:
       -  backend-cache:/code/target
     environment:
       - DATABASE_URL=${DATABASE_URL}
+      - SECRET_KEY=${SECRET_KEY}
     ports:
       - 4000:4000
     networks:

@@ -3,7 +3,8 @@ use super::db::PostgresPool;
 use super::graphql::create_schema;
 use super::graphql::Schema;
 
-use actix_web::{web::{self, Data}, Error, HttpResponse};
+use actix_web::FromRequest;
+use actix_web::{web::{self, Data}, Error, HttpResponse, HttpRequest};
 use juniper::http::playground::playground_source;
 use juniper::http::GraphQLRequest;
 use std::sync::Arc;
@@ -25,9 +26,18 @@ async fn graphql(
     pool: web::Data<PostgresPool>,
     schema: web::Data<Arc<Schema>>,
     data: web::Json<GraphQLRequest>,
+    req: HttpRequest
 ) -> Result<HttpResponse, Error> {
+    
+    let usertoken = match req.headers().get("auth") {
+        Some(token) => String::from(token.to_str().expect("")),
+        None => String::from(""),
+    };
+
+
     let ctx = GraphQLContext {
         pool: pool.get_ref().to_owned(),
+        token: usertoken
     };
 
     let res = data.execute(&schema, &ctx).await;

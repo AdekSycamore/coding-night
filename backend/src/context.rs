@@ -4,6 +4,7 @@ use super::db::PostgresPool;
 // interacting with the database.
 pub struct GraphQLContext {
     pub pool: PostgresPool,
+    pub token: String
 }
 
 // This impl allows us to pass in GraphQLContext as the Context for GraphQL
