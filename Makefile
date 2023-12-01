@@ -19,3 +19,12 @@ docker-frontend:
 #open db prompt
 docker-db:
 	docker exec -it db psql -U postgres
+
+# GIT COMMANDS
+# add changes to enable commit
+add:
+	git add .
+
+#commit changes
+commit:
+	git commit -m
