@@ -34,7 +34,7 @@ impl Todos {
 
 pub struct Users;
 
-impl User {
+impl Users {
     pub fn all_users(conn: &mut PgConnection) -> FieldResult<Vec<User>> {
         let res = users.load::<User>(conn);
 
