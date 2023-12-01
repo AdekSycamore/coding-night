@@ -36,10 +36,6 @@ async fn main() -> io::Result<()> {
             .wrap(middleware::Logger::default())
             .wrap(cors)
             .configure(graphql_endpoints)
-            .service(web::resource("/ping").to(ping))
-            .service(
-                web::scope("/api")
-                    .service(web::resource("/ping").to(ping)))
     })
     .bind("0.0.0.0:4000")?
     .run()

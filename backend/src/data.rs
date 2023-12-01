@@ -1,4 +1,4 @@
-use super::models::{CreateTodoInput, NewTodo, Todo, NewUser, CreateUserInput, User};
+use super::models::{CreateTodoInput, NewTodo, Todo, NewUser, CreateUserInput, User, LoginInput, Login};
 use super::schema::todos::dsl::*;
 use super::schema::users::dsl::*;
 use diesel::pg::PgConnection;
@@ -53,6 +53,22 @@ impl Users {
             .get_result(conn);
 
         graphql_translate(res)
+    }
+
+    pub fn login(conn: &mut PgConnection, input: LoginInput) -> FieldResult<Login> {
+        use super::schema::users;
+
+        let existing_user = users
+            .filter(username.eq(input.username))
+            .filter(password.eq(input.password))
+            .get_result::<User>(conn);
+
+        let x = Login {token: String::from("someusername123")};
+        
+        match existing_user {
+           Ok(registered_user) => Ok(x),
+           Err(e) => FieldResult::Err(FieldError::from(e)),
+        }
     }
 }
 

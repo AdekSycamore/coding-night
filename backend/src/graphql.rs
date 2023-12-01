@@ -1,6 +1,6 @@
 use super::context::GraphQLContext;
 use super::data::{Todos, Users};
-use super::models::{CreateTodoInput, Todo, User, CreateUserInput};
+use super::models::{CreateTodoInput, Todo, User, CreateUserInput, LoginInput, Login};
 
 use diesel::pg::PgConnection;
 use juniper::{EmptySubscription, FieldResult, RootNode};
@@ -13,6 +13,18 @@ impl QueryRoot {
         let conn: &mut PgConnection = &mut context.pool.get().unwrap();
 
         Todos::all_todos(conn)
+    }
+
+    pub fn all_users(context: &GraphQLContext) -> FieldResult<Vec<User>> {
+        let conn: &mut PgConnection = &mut context.pool.get().unwrap();
+
+        Users::all_users(conn)
+    }
+
+    pub fn login(context: &GraphQLContext, input: LoginInput) -> FieldResult<Login> {
+        let conn: &mut PgConnection = &mut context.pool.get().unwrap();
+
+        Users::login(conn, input)
     }
 }
 

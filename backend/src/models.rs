@@ -65,3 +65,23 @@ pub struct CreateUserInput {
     pub password: String,
 }
 
+#[derive(Queryable)]
+pub struct Login {
+    pub token: String,
+}
+
+#[juniper::graphql_object]
+impl Login {
+    fn token(&self) -> &str {
+        self.token.as_str()
+    }
+}
+
+
+#[derive(GraphQLInputObject)]
+pub struct LoginInput {
+    pub username: String,
+    pub password: String,
+}
+
+
