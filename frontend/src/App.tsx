@@ -1,14 +1,13 @@
 import './App.css';
-// import LogIn from './pages/LogIn';
-// import SignUp from './pages/SignUp';
-import Main from "./pages/Main";
+import LogIn from './pages/LogIn';
+import SignUp from './pages/SignUp';
 
 
 const App = () => {
  
   return (
     <div >
-      <Main/>
+      <LogIn/>
   </div>
   )
 }

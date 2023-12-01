@@ -21,7 +21,7 @@ const LogIn = () => {
 
     <div className="flex flex-row w-full">
 
-      <div className="hidden lg:flex flex-col justify-between bg-[url('./assets/help.jpg')] lg:p-8 xl:p-12 lg:max-w-sm xl:max-w-lg">
+      <div className="hidden lg:flex flex-col justify-between bg-[url('./pages/assets/help.jpg')] lg:p-8 xl:p-12 lg:max-w-sm xl:max-w-lg">
 
         <div>
           <h1 className="lg:text-3xl xl:text-5xl xl:leading-snug font-extrabold mt-6 text-white">Helping others is the secret to a happy life!</h1>
