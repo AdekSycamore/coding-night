@@ -25,6 +25,10 @@ docker-db:
 add:
 	git add .
 
-#commit changes
-commit:
-	git commit -m
+#push changes to github branch
+push:
+	git push -u origin master
+
+#pull updated files from git repository
+pull:
+	git pull
