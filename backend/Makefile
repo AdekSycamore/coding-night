@@ -7,3 +7,7 @@ dev-shell:
 #start backend(rust)
 server-run:
 	cargo run
+
+#start run migration
+migration:
+	diesel migration run
