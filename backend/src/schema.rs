@@ -7,3 +7,15 @@ diesel::table! {
         done -> Bool,
     }
 }
+
+diesel::table! {
+    users (username) {
+        username -> Varchar,
+        password -> Varchar,
+    }
+}
+
+diesel::allow_tables_to_appear_in_same_query!(
+    todos,
+    users,
+);
