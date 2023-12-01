@@ -1,0 +1,17 @@
+[package]
+name = "todos"
+version = "0.1.0"
+authors = ["lucperkins <lucperkins@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+actix-rt = "2.9.0"
+actix-web = "4.4.0"
+diesel = { version = "2.1.4", features = ["postgres", "r2d2"] }
+dotenv = "0.15.0"
+env_logger = "0.7.1"
+juniper = "0.15.11"
+r2d2 = "0.8.10"
+serde_json = "1.0.44"
+actix-cors = "0.6"
+juniper-from-schema = "0.5.2"

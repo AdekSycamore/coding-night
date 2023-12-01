@@ -1,0 +1,53 @@
+name: coding
+services:
+  frontend:
+    build:
+      context: frontend
+    networks:
+      - client-side
+    ports:
+      - 5173:5173
+    volumes:
+      - ./frontend/:/root/app/
+    container_name: frontend
+
+  backend:
+    build:
+      context: backend
+    restart: always
+    volumes:
+      - ./backend/:/root/app/
+      -  backend-cache:/code/target
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    ports:
+      - 4000:4000
+    networks:
+      - server-side
+      - client-side
+    container_name: backend
+    depends_on:
+      - db
+
+  db:
+    build:
+      context: db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    networks:
+      - server-side
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+    container_name: db
+
+networks:
+  server-side: {}
+  client-side: {}
+
+
+volumes:
+  backend-cache: {}
