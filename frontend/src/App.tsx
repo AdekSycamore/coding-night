@@ -15,7 +15,7 @@ export default function App() {
   const { loading, error, data } = useQuery(GET_LOCATIONS);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error.message}</p>;
+  if (error) return <h1 className="text-3xl font-bold underline">{error.message}</h1>;
 
   return (
     <div>
