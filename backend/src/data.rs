@@ -1,5 +1,6 @@
 use super::models::{ NewUser, CreateUserInput, User, LoginInput, Login, Post, NewPost, CreatePostInput};
 use super::schema::users::dsl::*;
+use super::schema::posts::dsl::*;
 use super::utils::{hash, verify, create_jwt};
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
