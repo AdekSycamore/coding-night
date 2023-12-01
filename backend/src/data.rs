@@ -1,8 +1,10 @@
 use super::models::{CreateTodoInput, NewTodo, Todo, NewUser, CreateUserInput, User, LoginInput, Login};
 use super::schema::todos::dsl::*;
 use super::schema::users::dsl::*;
+use super::utils::{hash, verify, create_jwt};
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
+
 use juniper::{FieldError, FieldResult};
 
 const DEFAULT_TODO_DONE: bool = false;
@@ -43,9 +45,19 @@ impl Users {
 
     pub fn create_user(conn: &mut PgConnection, new_user: CreateUserInput) -> FieldResult<User> {
         use super::schema::users;
+
+        let hashed_password: Result<String, easy_password::bcrypt::PasswordError> = hash(&new_user.password);   
+
+        let mut passwordx = String::new();
+
+        match hashed_password {
+            Ok(hash) => {passwordx = hash.to_string()},
+            Err(_) => return FieldResult::Err(FieldError::from("error")),
+        }
+
         let new_user = NewUser {
             username: &new_user.username,
-            password: &new_user.password,
+            password: &passwordx,
         };
 
         let res = diesel::insert_into(users::table)
@@ -58,16 +70,25 @@ impl Users {
     pub fn login(conn: &mut PgConnection, input: LoginInput) -> FieldResult<Login> {
         use super::schema::users;
 
-        let existing_user = users
+        let existing_user: Result<User, diesel::result::Error> = users
             .filter(username.eq(input.username))
-            .filter(password.eq(input.password))
             .get_result::<User>(conn);
 
-        let x = Login {token: String::from("someusername123")};
-        
         match existing_user {
-           Ok(registered_user) => Ok(x),
-           Err(e) => FieldResult::Err(FieldError::from(e)),
+           Ok(registered) => match verify(&registered.password, &input.password) {
+               Ok(valid) => {
+                if valid { 
+                     match create_jwt(&registered.username) {
+                        Ok(t) => Ok(Login {token: t}),
+                        Err(_) => FieldResult::Err(FieldError::from("cannot create token")) 
+                    } 
+                } else { 
+                    return FieldResult::Err(FieldError::from("inncorrect")) 
+                }
+            },
+            Err(_) => FieldResult::Err(FieldError::from("inncorrect"))
+           },
+           Err(_) => FieldResult::Err(FieldError::from("inncorrect")),
         }
     }
 }
