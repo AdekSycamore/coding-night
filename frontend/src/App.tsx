@@ -12,15 +12,13 @@ query{
 `;
 
 export default function App() {
-  const { loading, error, data } = useQuery(GET_LOCATIONS);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <h1 className="text-3xl font-bold underline">{error.message}</h1>;
+
 
   return (
     <div>
       <h1 className="text-3xl font-bold underline">
-        {JSON.stringify(data)}
+        fdfdgdfgfddfhfgfghhfgcscsdfgdfgf
       </h1>
     </div>
   );
