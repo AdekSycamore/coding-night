@@ -1,27 +1,15 @@
-import { useQuery, gql } from '@apollo/client';
+import React from 'react';
 import './App.css';
+import Navbar from './Navbar';
 
-const GET_LOCATIONS = gql`
-query{
-  allTodos {
-    id
-    task
-    done
-  }
-}
-`;
 
-export default function App() {
-  const { loading, error, data } = useQuery(GET_LOCATIONS);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error.message}</p>;
-
+const App = () => {
+ 
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">
-        {JSON.stringify(data)}
-      </h1>
+      <Navbar/>
     </div>
-  );
+  )
 }
+
+export default App;
