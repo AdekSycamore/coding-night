@@ -29,7 +29,6 @@ impl Users {
     }
 
     pub fn login(conn: &mut PgConnection, input: LoginInput) -> FieldResult<Login> {
-        use super::schema::users;
 
         let existing_user = users
             .filter(username.eq(input.username))
@@ -39,7 +38,7 @@ impl Users {
         let x = Login {token: String::from("someusername123")};
         
         match existing_user {
-           Ok(registered_user) => Ok(x),
+           Ok(_registered_user) => Ok(x),
            Err(e) => FieldResult::Err(FieldError::from(e)),
         }
     }
