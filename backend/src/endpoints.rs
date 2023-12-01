@@ -21,7 +21,6 @@ async fn graphql_playground() -> HttpResponse {
         .content_type("text/html; charset=utf-8")
         .body(playground_source("/graphql", None))
 }
-
 async fn graphql(
     pool: web::Data<PostgresPool>,
     schema: web::Data<Arc<Schema>>,

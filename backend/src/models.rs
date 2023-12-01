@@ -1,4 +1,4 @@
-use super::schema::todos;
+use super::schema::*;
 use juniper::GraphQLInputObject;
 
 #[derive(Queryable)]
@@ -35,3 +35,33 @@ pub struct CreateTodoInput {
     pub task: String,
     pub done: Option<bool>,
 }
+
+#[derive(Queryable)]
+pub struct User {
+    pub username: String,
+    pub password: String,
+}
+
+#[juniper::graphql_object]
+impl User {
+    fn username(&self) -> &str {
+        self.username.as_str()
+    }
+
+    pub fn password(&self) -> &str {
+        self.password.as_str()
+    }
+}
+
+#[derive(Insertable)]
+#[table_name = "users"]
+pub struct NewUser<'a> {
+    pub username: &'a str,
+    pub password: &'a str,
+}
+#[derive(GraphQLInputObject)]
+pub struct CreateUserInput {
+    pub username: String,
+    pub password: String,
+}
+
