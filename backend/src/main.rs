@@ -10,11 +10,10 @@ extern crate todos;
 use std::{env, io};
 
 use actix_cors::Cors;
-use actix_web::web;
 use actix_web::{middleware, App, HttpServer, web::Data, HttpResponse};
 
 use todos::db::get_pool;
-use todos::endpoints::{self, graphql_endpoints};
+use todos::endpoints::graphql_endpoints;
 
 pub async fn ping() -> HttpResponse {
     HttpResponse::Ok()

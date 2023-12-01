@@ -1,6 +1,8 @@
+use crate::models::{Post, CreatePostInput};
+
 use super::context::GraphQLContext;
-use super::data::{Todos, Users};
-use super::models::{CreateTodoInput, Todo, User, CreateUserInput, LoginInput, Login};
+use super::data::{Posts, Users};
+use super::models::{User, CreateUserInput, LoginInput, Login};
 
 use diesel::pg::PgConnection;
 use juniper::{EmptySubscription, FieldResult, RootNode};
@@ -9,12 +11,6 @@ pub struct QueryRoot;
 
 #[juniper::graphql_object(Context = GraphQLContext)]
 impl QueryRoot {
-    pub fn all_todos(context: &GraphQLContext) -> FieldResult<Vec<Todo>> {
-        let conn: &mut PgConnection = &mut context.pool.get().unwrap();
-
-        Todos::all_todos(conn)
-    }
-
     pub fn all_users(context: &GraphQLContext) -> FieldResult<Vec<User>> {
         let conn: &mut PgConnection = &mut context.pool.get().unwrap();
 
@@ -26,22 +22,28 @@ impl QueryRoot {
 
         Users::login(conn, input)
     }
+
+    pub fn all_posts(context: &GraphQLContext) -> FieldResult<Vec<Post>> {
+        let conn: &mut PgConnection = &mut context.pool.get().unwrap();
+
+        Posts::all_posts(conn)
+    }
 }
 
 pub struct MutationRoot;
 
 #[juniper::graphql_object(Context = GraphQLContext)]
 impl MutationRoot {
-    pub fn create_todo(context: &GraphQLContext, input: CreateTodoInput) -> FieldResult<Todo> {
-        let conn: &mut PgConnection = &mut context.pool.get().unwrap();
-
-        Todos::create_todo(conn, input)
-    }
-
-    pub fn create_user(context: &GraphQLContext, input: CreateUserInput) -> FieldResult<User> {
+     pub fn create_user(context: &GraphQLContext, input: CreateUserInput) -> FieldResult<User> {
         let conn: &mut PgConnection = &mut context.pool.get().unwrap();
 
         Users::create_user(conn, input)
+    }
+
+    pub fn create_post(context: &GraphQLContext, input: CreatePostInput) -> FieldResult<Post> {
+        let conn: &mut PgConnection = &mut context.pool.get().unwrap();
+
+        Posts::create_post(conn, input)
     }
 }
 
