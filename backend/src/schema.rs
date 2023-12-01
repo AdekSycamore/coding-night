@@ -1,10 +1,11 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
-    todos (id) {
+    posts (id) {
         id -> Int4,
-        task -> Varchar,
-        done -> Bool,
+        author -> Varchar,
+        location -> Varchar,
+        content -> Varchar,
     }
 }
 
@@ -16,6 +17,6 @@ diesel::table! {
 }
 
 diesel::allow_tables_to_appear_in_same_query!(
-    todos,
+    posts,
     users,
 );

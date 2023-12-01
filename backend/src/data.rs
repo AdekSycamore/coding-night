@@ -1,38 +1,10 @@
-use super::models::{CreateTodoInput, NewTodo, Todo, NewUser, CreateUserInput, User, LoginInput, Login};
-use super::schema::todos::dsl::*;
+use super::models::{ NewUser, CreateUserInput, User, LoginInput, Login, Post, NewPost, CreatePostInput};
 use super::schema::users::dsl::*;
 use super::utils::{hash, verify, create_jwt};
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
 
 use juniper::{FieldError, FieldResult};
-
-const DEFAULT_TODO_DONE: bool = false;
-
-pub struct Todos;
-
-impl Todos {
-    pub fn all_todos(conn: &mut PgConnection) -> FieldResult<Vec<Todo>> {
-        let res = todos.load::<Todo>(conn);
-
-        graphql_translate(res)
-    }
-
-    pub fn create_todo(conn: &mut PgConnection, new_todo: CreateTodoInput) -> FieldResult<Todo> {
-        use super::schema::todos;
-
-        let new_todo = NewTodo {
-            task: &new_todo.task,
-            done: &new_todo.done.unwrap_or(DEFAULT_TODO_DONE),
-        };
-
-        let res = diesel::insert_into(todos::table)
-            .values(&new_todo)
-            .get_result(conn);
-
-        graphql_translate(res)
-    }
-}
 
 pub struct Users;
 
@@ -90,6 +62,31 @@ impl Users {
            },
            Err(_) => FieldResult::Err(FieldError::from("inncorrect")),
         }
+    }
+}
+
+pub struct Posts;
+impl Posts {
+    pub fn all_posts(conn: &mut PgConnection) -> FieldResult<Vec<Post>> {
+        let res = posts.load::<Post>(conn);
+
+        graphql_translate(res)
+    }
+
+    pub fn create_post(conn: &mut PgConnection, new_post: CreatePostInput) -> FieldResult<Post> {
+        use super::schema::posts;
+
+        let new_post = NewPost {
+            content: &new_post.content,
+            location: &new_post.location,
+            author: &new_post.location,
+        };
+
+        let res = diesel::insert_into(posts::table)
+            .values(&new_post)
+            .get_result(conn);
+
+        graphql_translate(res)
     }
 }
 

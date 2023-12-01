@@ -2,41 +2,6 @@ use super::schema::*;
 use juniper::GraphQLInputObject;
 
 #[derive(Queryable)]
-pub struct Todo {
-    pub id: i32,
-    pub task: String,
-    pub done: bool,
-}
-
-#[juniper::graphql_object]
-impl Todo {
-    fn id(&self) -> i32 {
-        self.id
-    }
-
-    pub fn task(&self) -> &str {
-        self.task.as_str()
-    }
-
-    fn done(&self) -> bool {
-        self.done
-    }
-}
-
-#[derive(Insertable)]
-#[table_name = "todos"]
-pub struct NewTodo<'a> {
-    pub task: &'a str,
-    pub done: &'a bool,
-}
-
-#[derive(GraphQLInputObject)]
-pub struct CreateTodoInput {
-    pub task: String,
-    pub done: Option<bool>,
-}
-
-#[derive(Queryable)]
 pub struct User {
     pub username: String,
     pub password: String,
@@ -84,4 +49,44 @@ pub struct LoginInput {
     pub password: String,
 }
 
+#[derive(Queryable)]
+pub struct Post {
+    pub id: i32,
+    pub author: String,
+    pub location: String,
+    pub content: String,
+}
 
+#[juniper::graphql_object]
+impl Post {
+    fn id(&self) -> i32 {
+        self.id
+    }
+
+    pub fn author(&self) -> &str {
+        self.author.as_str()
+    }
+
+    pub fn location(&self) -> &str {
+        self.location.as_str()
+    }
+
+    pub fn content(&self) -> &str {
+        self.content.as_str()
+    }
+}
+
+#[derive(Insertable)]
+#[table_name = "posts"]
+pub struct NewPost<'a> {
+    pub content: &'a str,
+    pub location: &'a str,
+    pub author: &'a str,
+}
+
+#[derive(GraphQLInputObject)]
+pub struct CreatePostInput {
+    pub content: String,
+    pub location: String,
+    pub author: String,
+}
