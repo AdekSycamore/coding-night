@@ -1,5 +1,4 @@
 import { useRef, ChangeEvent } from 'react';
-import Navbar from './components/Navbar';
 
 
 const LogIn = () => {

@@ -41,10 +41,12 @@ const SignUp = () => {
   }
 
   return (
+    <>
+    <Navbar/>
     <div className="bg-white">
-
-      <div className="flex min-h-screen">
       <Navbar/>
+      <div className="flex min-h-screen">
+     
         <div className="flex flex-row w-full">
 
           <div className="flex flex-1 flex-col items-center justify-center px-10 relative">
@@ -97,6 +99,7 @@ const SignUp = () => {
       </div>
 
     </div>
+    </>
   )
 }
 

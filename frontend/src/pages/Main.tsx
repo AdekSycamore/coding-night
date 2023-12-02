@@ -1,4 +1,3 @@
-import Post from './components/Post';
 import Navbar from './components/Navbar';
 
 
@@ -8,7 +7,7 @@ const Main = () => {
         <Navbar/>
 <script src="//unpkg.com/alpinejs" defer></script>
 
-<main>
+<main className="bg-sky-500">
     <section className="bg-white dark:bg-gray-900">
     <div className="container mx-auto px-6 py-16 text-center">
         <div className="mx-auto max-w-lg">
