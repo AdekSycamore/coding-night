@@ -1,6 +1,7 @@
 use crate::models::{Post, CreatePostInput};
 use serde::{Deserialize, Serialize};
 use serde_json::de;
+use regex::Regex;
 
 use super::context::GraphQLContext;
 use super::data::{Posts, Users};
@@ -46,11 +47,7 @@ impl MutationRoot {
     pub fn create_post(context: &GraphQLContext, input: CreatePostInput) -> FieldResult<Login> {
         let conn: &mut PgConnection = &mut context.pool.get().unwrap();
 
-        let token_message =  decode::<HashMap<String, serde_json::Value>>(&context.token,  &DecodingKey::from_secret("secret".as_ref()), &Validation::new(Algorithm::HS512)).unwrap();
-
-        println!("{:?}", token_message);
-
-        Ok(Login { token: String::from("fdfd") })
+         
     }
 }
 
