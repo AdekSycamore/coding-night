@@ -12,6 +12,7 @@ use super::models::{User, CreateUserInput, LoginInput, Login};
 use diesel::pg::PgConnection;
 use jsonwebtoken::{decode, DecodingKey, Validation, Algorithm, TokenData, Header};
 use juniper::{EmptySubscription, FieldResult, RootNode, FieldError};
+use super::schema::users::dsl::*;
 
 pub struct QueryRoot;
 
@@ -49,7 +50,9 @@ impl MutationRoot {
     pub fn create_post(context: &GraphQLContext, input: CreatePostInput) -> FieldResult<Post> {
         let conn: &mut PgConnection = &mut context.pool.get().unwrap();
 
-        let decoded_username: Result<TokenData<String>, jsonwebtoken::errors::Error> = decode::<String>(&context.token, &DecodingKey::from_secret(b"secret"), &Validation::new(Algorithm::HS512));
+        let existing_user: Result<User, diesel::result::Error> = users
+            .filter(username.eq(input.username))
+            .get_result::<User>(conn);
 
         match decoded_username {
             Ok(u) =>  Ok(Login {token: u.claims}),
