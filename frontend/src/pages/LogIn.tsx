@@ -35,17 +35,10 @@ const LogIn = () => {
               </div>
             </div>
 
-                  <div className="flex flex-1 flex-col px-10 relative">
+                  <div className="flex flex-1 flex-col px-10 relative h-screen">
                     <Navbar/>
-                    <div className="flex items-center justify-center relative">
-                    <div className="flex lg:hidden justify-between items-center w-full py-4">
-                      <div className="flex items-center space-x-2">
-                        <span>Not a member? </span>
-                        <a href="#" className="underline font-medium text-[#070eff]">
-                          Sign up now
-                        </a>
-                      </div>
-                    </div>
+                    <div className="flex items-center justify-center h-screen relative">
+                    
                     <div className="flex flex-1 flex-col  justify-center space-y-7 max-w-md">
                       <div className="flex flex-col space-y-2 text-center">
                         <h2 className="text-3xl md:text-4xl font-bold">Sign in to account</h2>
@@ -62,10 +55,10 @@ const LogIn = () => {
                         <Link to="/signup"><span className="flex flex-col items-center w-full text-sm cursor-pointer">Create an account here!</span></Link>
                       </div>
                     </div>
+                    </div>
                   </div>
                   </div>
                 </div>
-      </div>
       </div>
   )
 }
