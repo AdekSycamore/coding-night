@@ -55,6 +55,7 @@ pub struct Post {
     pub author: String,
     pub location: String,
     pub content: String,
+    pub title: String,
 }
 
 #[juniper::graphql_object]
@@ -74,6 +75,10 @@ impl Post {
     pub fn content(&self) -> &str {
         self.content.as_str()
     }
+
+    pub fn title(&self) -> &str {
+        self.title.as_str()
+    }
 }
 
 #[derive(Insertable)]
@@ -82,6 +87,7 @@ pub struct NewPost<'a> {
     pub content: &'a str,
     pub location: &'a str,
     pub author: &'a str,
+    pub title: &'a str,
 }
 
 #[derive(GraphQLInputObject)]
@@ -89,4 +95,5 @@ pub struct CreatePostInput {
     pub content: String,
     pub location: String,
     pub author: String,
+    pub title: String,
 }

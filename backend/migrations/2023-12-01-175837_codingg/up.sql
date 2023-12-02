@@ -8,5 +8,6 @@ CREATE TABLE posts(
   id SERIAL PRIMARY KEY,
   author VARCHAR NOT NULL,
   location VARCHAR NOT NULL,
+  title VARCHAR NOT NULL,
   content VARCHAR NOT NULL
 )

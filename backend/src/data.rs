@@ -79,7 +79,8 @@ impl Posts {
         let new_post = NewPost {
             content: &new_post.content,
             location: &new_post.location,
-            author: &new_post.location,
+            author: &new_post.author,
+            title: &new_post.title,
         };
 
         let res = diesel::insert_into(posts::table)
