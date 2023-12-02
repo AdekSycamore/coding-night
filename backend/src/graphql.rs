@@ -33,6 +33,12 @@ impl QueryRoot {
 
         Posts::all_posts(conn)
     }
+
+    pub fn get_post_by_location(context: &GraphQLContext, this_location: String) -> FieldResult<Vec<Post>>{
+        let conn: &mut PgConnection = &mut context.pool.get().unwrap();
+        
+        Posts::get_post_by_location(conn, this_location)
+    }
 }
 
 pub struct MutationRoot;

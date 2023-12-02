@@ -1,3 +1,5 @@
+use crate::schema::posts;
+
 use super::models::{ NewUser, CreateUserInput, User, LoginInput, Login, Post, NewPost, CreatePostInput};
 use super::schema::users::dsl::*;
 use super::schema::posts::dsl::*;
@@ -94,6 +96,15 @@ impl Posts {
             .get_result(conn);
 
         graphql_translate(res)
+    }
+
+    pub fn get_post_by_location(conn: &mut PgConnection, this_location: String) -> FieldResult<Vec<Post>>{
+        let posts_filter = posts
+            .filter(location
+            .eq(this_location))
+            .load::<Post>(conn);
+
+        graphql_translate(posts_filter)
     }
 }
 
