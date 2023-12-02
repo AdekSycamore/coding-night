@@ -5,6 +5,10 @@ use juniper::GraphQLInputObject;
 pub struct User {
     pub username: String,
     pub password: String,
+    pub phone: String,
+    pub region: String,
+    pub firstname: String,
+    pub lastname: String,
 }
 
 #[juniper::graphql_object]
@@ -16,6 +20,18 @@ impl User {
     pub fn password(&self) -> &str {
         self.password.as_str()
     }
+    pub fn phone(&self) -> &str {
+        self.phone.as_str()
+    }
+    pub fn region(&self) -> &str {
+        self.region.as_str()
+    }
+    pub fn firstname(&self) -> &str {
+        self.firstname.as_str()
+    }
+    pub fn lastname(&self) -> &str {
+        self.lastname.as_str()
+    }
 }
 
 #[derive(Insertable)]
@@ -23,11 +39,19 @@ impl User {
 pub struct NewUser<'a> {
     pub username: &'a str,
     pub password: &'a str,
+    pub phone: &'a str,
+    pub region: &'a str,
+    pub firstname: &'a str,
+    pub lastname: &'a str,
 }
 #[derive(GraphQLInputObject)]
 pub struct CreateUserInput {
     pub username: String,
     pub password: String,
+    pub phone: String,
+    pub region: String,
+    pub firstname: String,
+    pub lastname: String,
 }
 
 #[derive(Queryable)]
@@ -56,6 +80,8 @@ pub struct Post {
     pub location: String,
     pub content: String,
     pub title: String,
+    pub link: String,
+    pub maplink: String,
 }
 
 #[juniper::graphql_object]
@@ -79,6 +105,13 @@ impl Post {
     pub fn title(&self) -> &str {
         self.title.as_str()
     }
+
+    pub fn link(&self) -> &str{
+        self.title.as_str()
+    }
+    pub fn maplink(&self) -> &str{
+        self.maplink.as_str()
+    }
 }
 
 #[derive(Insertable)]
@@ -88,6 +121,8 @@ pub struct NewPost<'a> {
     pub location: &'a str,
     pub author: &'a str,
     pub title: &'a str,
+    pub link: &'a str,
+    pub maplink: &'a str,
 }
 
 #[derive(GraphQLInputObject)]
@@ -96,4 +131,6 @@ pub struct CreatePostInput {
     pub location: String,
     pub author: String,
     pub title: String,
+    pub link: String,
+    pub maplink: String,
 }

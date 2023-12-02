@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use crate::models::{Post, CreatePostInput};
 use serde::{Deserialize, Serialize};
 use serde_json::de;
@@ -10,7 +12,7 @@ use super::models::{User, CreateUserInput, LoginInput, Login};
 use diesel::pg::PgConnection;
 use jsonwebtoken::{decode, DecodingKey, Validation, Algorithm, TokenData, Header};
 use juniper::{EmptySubscription, FieldResult, RootNode, FieldError};
-use std::collections::HashMap;
+
 pub struct QueryRoot;
 
 #[juniper::graphql_object(Context = GraphQLContext)]
@@ -44,10 +46,16 @@ impl MutationRoot {
         Users::create_user(conn, input)
     }
 
-    pub fn create_post(context: &GraphQLContext, input: CreatePostInput) -> FieldResult<Login> {
+    pub fn create_post(context: &GraphQLContext, input: CreatePostInput) -> FieldResult<Post> {
         let conn: &mut PgConnection = &mut context.pool.get().unwrap();
 
-         
+        let decoded_username: Result<TokenData<String>, jsonwebtoken::errors::Error> = decode::<String>(&context.token, &DecodingKey::from_secret(b"secret"), &Validation::new(Algorithm::HS512));
+
+        match decoded_username {
+            Ok(u) =>  Ok(Login {token: u.claims}),
+            Err(e) => FieldResult::Err(FieldError::from(e)),
+        }
+        
     }
 }
 
