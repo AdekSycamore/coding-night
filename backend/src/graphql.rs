@@ -42,13 +42,13 @@ impl MutationRoot {
         Users::create_user(conn, input)
     }
 
-    pub fn create_post(context: &GraphQLContext, input: CreatePostInput) -> FieldResult<Post> {
+    pub fn create_post(context: &GraphQLContext, input: CreatePostInput) -> FieldResult<Login> {
         let conn: &mut PgConnection = &mut context.pool.get().unwrap();
 
-        let decoded_username: Result<TokenData<String>, jsonwebtoken::errors::Error> = decode::<String>(&context.token, &DecodingKey::from_secret("secret".as_ref()), &Validation::new(Algorithm::HS512)).map_err(|err|{err});
+        let decoded_username: Result<TokenData<String>, jsonwebtoken::errors::Error> = decode::<String>(&context.token, &DecodingKey::from_secret(b"secret"), &Validation::new(Algorithm::HS512));
 
-        match decoded_username{
-            Ok(u) => {println!("{}", u.claims);if u.claims==input.author{Posts::create_post(conn, input)} else{FieldResult::Err(FieldError::from("inccorect username"))}},
+        match decoded_username {
+            Ok(u) =>  Ok(Login {token: u.claims}),
             Err(e) => FieldResult::Err(FieldError::from(e)),
         }
         
