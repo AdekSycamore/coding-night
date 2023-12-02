@@ -31,6 +31,10 @@ impl Users {
         let new_user = NewUser {
             username: &new_user.username,
             password: &passwordx,
+            lastname: &new_user.lastname,
+            firstname: &new_user.firstname,
+            region: &new_user.region,
+            phone: &new_user.phone,
         };
 
         let res = diesel::insert_into(users::table)
@@ -81,6 +85,8 @@ impl Posts {
             location: &new_post.location,
             author: &new_post.author,
             title: &new_post.title,
+            link: &new_post.link,
+            maplink: &new_post.maplink,
         };
 
         let res = diesel::insert_into(posts::table)

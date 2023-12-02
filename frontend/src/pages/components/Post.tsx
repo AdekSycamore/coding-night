@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 type Person = {
   username: string;
   title: string;
@@ -31,9 +33,11 @@ const Post = (person: Person) => {
               <span className="material-symbols-outlined">chat</span>
                 <p className="w-full whitespace-nowrap text-ellipsis overflow-hidden">{person.content}</p>
               </div>
+              <Link to="/profile">
               <button className="mt-4 text-xl w-full text-white bg-primary py-2 rounded-xl shadow-lg">
                 Show offer!
               </button>
+              </Link>
             </div>
           </div>
         </div>

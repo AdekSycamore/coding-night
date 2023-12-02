@@ -13,6 +13,7 @@ import NavBar from './pages/components/Navbar';
 import { Link } from "react-router-dom";
 
 import './index.css';
+import Profile from './pages/Profile';
 
 const router = createBrowserRouter([
   {
@@ -32,8 +33,13 @@ const router = createBrowserRouter([
     element: <PostPage/>,
   },
   {
+<<<<<<< HEAD
     path:"/create",
     element:<CreatePost/>
+=======
+    path: "/profile",
+    element: <Profile/>,
+>>>>>>> acf26e3cb8e6f432354a666f37458d3c3817f4db
   },
 ]);
 
