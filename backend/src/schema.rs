@@ -7,6 +7,8 @@ diesel::table! {
         location -> Varchar,
         title -> Varchar,
         content -> Varchar,
+        link -> Varchar,
+        maplink -> Varchar,
     }
 }
 
@@ -14,6 +16,10 @@ diesel::table! {
     users (username) {
         username -> Varchar,
         password -> Varchar,
+        phone -> Varchar,
+        region -> Varchar,
+        firstname -> Varchar,
+        lastname -> Varchar,
     }
 }
 
