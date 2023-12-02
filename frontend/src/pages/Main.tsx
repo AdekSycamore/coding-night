@@ -18,7 +18,7 @@ const Main = () => {
         </div>
 
         <div className="mt-10 flex justify-center">
-        <img className="h-96 w-full rounded-xl object-cover lg:w-4/5" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" />
+        <img className="h-111 w-full rounded-xl object-cover lg:w-4/5" src="https://www.eventbrite.co.uk/blog/wp-content/uploads/2022/06/Promote-charity-event.png" />
         </div>
     </div>
     </section>

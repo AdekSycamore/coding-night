@@ -25,7 +25,7 @@ pub fn verify(hash: &str, password: &str) -> Result<bool, PasswordError> {
     })
 }
 
-pub fn create_jwt(user_name: &String) -> Result<String, ErrorKind> {
+pub fn create_jwt(user_name: &str) -> Result<String, ErrorKind> {
 
     let expiration = Utc::now()
         .checked_add_signed(chrono::Duration::seconds(60))
