@@ -8,6 +8,7 @@ import App from './App';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
 import PostPage from './pages/PostPage';
+import CreatePost from './pages/CreatePost';
 import NavBar from './pages/components/Navbar';
 import { Link } from "react-router-dom";
 
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/post",
     element: <PostPage/>,
+  },
+  {
+    path:"/create",
+    element:<CreatePost/>
   },
 ]);
 

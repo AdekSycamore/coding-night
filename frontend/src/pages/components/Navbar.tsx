@@ -26,7 +26,6 @@ const Navbar = () => {
             <Link to="/">
                 <p className="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-8">Home</p>
             </Link>
-            <a className="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-8" href="#">Contact</a>
             <Link to="/login">
             <span className="material-symbols-outlined cursor-pointer">person</span>
             </Link>

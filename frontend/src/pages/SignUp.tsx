@@ -11,6 +11,7 @@ const SignUp = () => {
   const passRef = useRef<string>('');
   const secpassRef = useRef<string>('');
   const locationRef = useRef<string>('');
+  const numberRef = useRef<string>('');
 
   const NameChange = (event: ChangeEvent<HTMLInputElement>): void => {
     nameRef.current = event.target.value;
@@ -36,6 +37,9 @@ const SignUp = () => {
 
   const LocationChange = (event: ChangeEvent<HTMLInputElement>): void => {
     locationRef.current = event.target.value;
+  }
+  const NumberChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    numberRef.current = event.target.value;
   }
 
   const VerifyPassword = () => {
@@ -75,25 +79,28 @@ const SignUp = () => {
                   <option value="Both">In Between</option>
                 </select>
               </div>
-              <div className="flex flex-col max-w-md space-y-5">
+              <div className="flex flex-row w-full justify-around">
                 <input type="text" placeholder="Location" onChange={LocationChange}
-                  className="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal" />
+                  className="flex w-1/2 mr-1 px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal" />
+                  <input type="text" placeholder="Phone Number" onChange={NumberChange}
+                  className="flex w-1/2 px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal" />
               </div>
-              <div className="flex flex-col max-w-md space-y-5">
+              <div className="flex flex-col max-w-md">
                 <input type="text" placeholder="Username" onChange={UserChange}
                   className="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal" />
               </div>
-              <div className="flex flex-col max-w-md space-y-5">
+              <div className="flex flex-row w-full justify-around">
                 <input type="password" placeholder="Password" onChange={PassChange}
-                  className="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal" />
-
+                  className="flex w-1/2 px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal mr-1" />
                 <input type="password" placeholder="Verify password" onChange={SecPassChange}
-                  className="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal" />
-
+                  className="flex w-1/2 px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal" />
+              </div>
+              <div className="flex flex-col w-full space-y-5">
                 <span className="w-full border border-black"></span>
 
                 <button onClick={VerifyPassword} className="flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-[#000] bg-[#000] text-[#fff]">Confirm</button>
                 <span id="dec" className="flex flex-col items-center w-full text-sm text-[#f00]"></span>
+                </div>
               </div>
             </div>
           </div>
@@ -107,8 +114,6 @@ const SignUp = () => {
         </div>
 
       </div>
-
-    </div>
     </>
   )
 }
