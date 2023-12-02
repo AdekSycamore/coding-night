@@ -9,6 +9,7 @@ import App from './App';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
 import PostPage from './pages/PostPage';
+import CreatePost from './pages/CreatePost';
 
 
 import './index.css';
@@ -32,8 +33,8 @@ const router = createBrowserRouter([
     element: <PostPage/>,
   },
   {
-    path: "/profile",
-    element: <Profile/>,
+    path:"/create",
+    element:<CreatePost/>
   },
 ]);
 
