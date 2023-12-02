@@ -1,10 +1,13 @@
 import { useRef, ChangeEvent } from 'react';
-import { Link } from "react-router-dom";
+import { Link, redirect  } from "react-router-dom";
 import Navbar from './components/Navbar';
+import { gql, useQuery } from '@apollo/client';
+
+
+
 
 
 const LogIn = () => {
-
   const userRef = useRef<string>('');
   const passRef = useRef<string>('');
 
@@ -15,7 +18,6 @@ const LogIn = () => {
   const PassChange = (event: ChangeEvent<HTMLInputElement>): void => {
     passRef.current = event.target.value;
   }
-
 
   return (
     <div className="bg-white">
@@ -51,7 +53,7 @@ const LogIn = () => {
                         <input type="password" placeholder="Password" onChange={PassChange}
                           className="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal" />
                         <span className="w-full border border-black"></span>
-                        <button className="flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-[#000] bg-[#000] text-[#fff]">Confirm</button>
+                        <button onClick={} className="flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-[#000] bg-[#000] text-[#fff]">Confirm</button>
                         <Link to="/signup"><span className="flex flex-col items-center w-full text-sm cursor-pointer">Create an account here!</span></Link>
                       </div>
                     </div>

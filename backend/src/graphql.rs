@@ -13,6 +13,7 @@ use super::models::{User, CreateUserInput, LoginInput, Login};
 use diesel::pg::PgConnection;
 use jsonwebtoken::{decode, DecodingKey, Validation, Algorithm, TokenData, Header, encode, EncodingKey};
 use juniper::{EmptySubscription, FieldResult, RootNode, FieldError};
+use super::schema::users::dsl::*;
 
 pub struct QueryRoot;
 
