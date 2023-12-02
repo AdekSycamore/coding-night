@@ -1,5 +1,4 @@
 use std::env;
-use actix_web::web::Bytes;
 use easy_password::bcrypt::{hash_password, verify_password, PasswordError};
 use jsonwebtoken::{decode, encode, Algorithm, DecodingKey, EncodingKey, Header, Validation};
 use chrono::Utc;

@@ -3,7 +3,6 @@ use super::db::PostgresPool;
 use super::graphql::create_schema;
 use super::graphql::Schema;
 
-use actix_web::FromRequest;
 use actix_web::{web::{self, Data}, Error, HttpResponse, HttpRequest};
 use juniper::http::playground::playground_source;
 use juniper::http::GraphQLRequest;

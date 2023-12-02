@@ -5,6 +5,7 @@ diesel::table! {
         id -> Int4,
         author -> Varchar,
         location -> Varchar,
+        title -> Varchar,
         content -> Varchar,
     }
 }
