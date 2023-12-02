@@ -7,11 +7,11 @@ type Person = {
 }
 const Post = (person: Person) => {
     return(
-    <div className="w-1/6 h-50 p-9 pr-9 m-4 overflow-hidden text-black bg-white">
-        <div> <span>{person.username}: {person.location}</span>
-        <h2>{person.title}</h2></div>
-        <div><p>{person.content}</p></div>
-    </div>
+        <div className="h-118 w-full rounded-lg object-cover">
+        <h2 className="mt-4 text-2xl font-semibold capitalize text-gray-800 dark:text-white">{person.title}</h2>
+        <span className="mt-2 text-lg uppercase tracking-wider text-[#000] dark:text-blue-400">{person.username} living in {person.location}</span>
+        <p className="mt-3 text-md uppercase tracking-wider text-blue-500 dark:text-blue-400">{person.content}</p>
+        </div>
     )
 }
 
