@@ -35,21 +35,21 @@ const SignUp = () => {
 
   const VerifyPassword = () => {
     const dec: HTMLSpanElement | null = (document.getElementById("dec") as HTMLSpanElement);
-    if (passRef != secpassRef) {
+    if (passRef.current != secpassRef.current) {
       dec.textContent = "Passwords do not matches!";
+    }else{
+      dec.textContent = "";
     }
   }
 
   return (
     <>
-    <Navbar/>
     <div className="bg-white">
-      <Navbar/>
       <div className="flex min-h-screen">
-     
+      
         <div className="flex flex-row w-full">
-
-          <div className="flex flex-1 flex-col items-center justify-center px-10 relative">
+          <div className="flex flex-1 flex-col px-10 relative"><Navbar/>
+          <div className="flex items-center justify-center relative">
             <div className="flex flex-1 flex-col  justify-center space-y-5 max-w-md">
               <div className="flex flex-col space-y-2 text-center">
                 <h2 className="text-3xl md:text-4xl font-bold">Create an account</h2>
@@ -83,10 +83,11 @@ const SignUp = () => {
 
                 <span className="w-full border border-black"></span>
 
-                <button onClick={VerifyPassword} className="flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-black bg-black text-white">Confirm</button>
+                <button onClick={VerifyPassword} className="flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-[#000] bg-[#000] text-[#fff]">Confirm</button>
                 <span id="dec" className="flex flex-col items-center w-full text-sm text-[#f00]"></span>
               </div>
             </div>
+          </div>
           </div>
           <div className="hidden lg:flex flex-col justify-between bg-[url('./pages/assets/charity.jpg')] lg:p-8 xl:p-12 lg:max-w-sm xl:max-w-lg">
 
