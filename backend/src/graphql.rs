@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 use crate::models::{Post, CreatePostInput};
+use juniper::meta::Field;
 use serde::{Deserialize, Serialize};
 use serde_json::de;
 use regex::Regex;
@@ -10,9 +11,8 @@ use super::data::{Posts, Users};
 use super::models::{User, CreateUserInput, LoginInput, Login};
 
 use diesel::pg::PgConnection;
-use jsonwebtoken::{decode, DecodingKey, Validation, Algorithm, TokenData, Header};
+use jsonwebtoken::{decode, DecodingKey, Validation, Algorithm, TokenData, Header, encode, EncodingKey};
 use juniper::{EmptySubscription, FieldResult, RootNode, FieldError};
-use super::schema::users::dsl::*;
 
 pub struct QueryRoot;
 
@@ -38,7 +38,7 @@ impl QueryRoot {
 }
 
 pub struct MutationRoot;
-
+const JWT_SECRET: &[u8] = b"secret";
 #[juniper::graphql_object(Context = GraphQLContext)]
 impl MutationRoot {
      pub fn create_user(context: &GraphQLContext, input: CreateUserInput) -> FieldResult<User> {
@@ -50,15 +50,7 @@ impl MutationRoot {
     pub fn create_post(context: &GraphQLContext, input: CreatePostInput) -> FieldResult<Post> {
         let conn: &mut PgConnection = &mut context.pool.get().unwrap();
 
-        let existing_user: Result<User, diesel::result::Error> = users
-            .filter(username.eq(input.username))
-            .get_result::<User>(conn);
-
-        match decoded_username {
-            Ok(u) =>  Ok(Login {token: u.claims}),
-            Err(e) => FieldResult::Err(FieldError::from(e)),
-        }
-        
+        Posts::create_post(conn, input)
     }
 }
 
