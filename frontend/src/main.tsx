@@ -33,13 +33,8 @@ const router = createBrowserRouter([
     element: <PostPage/>,
   },
   {
-<<<<<<< HEAD
     path:"/create",
     element:<CreatePost/>
-=======
-    path: "/profile",
-    element: <Profile/>,
->>>>>>> acf26e3cb8e6f432354a666f37458d3c3817f4db
   },
 ]);
 
