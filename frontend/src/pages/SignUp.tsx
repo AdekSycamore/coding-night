@@ -10,6 +10,7 @@ const SignUp = () => {
   const userRef = useRef<string>('');
   const passRef = useRef<string>('');
   const secpassRef = useRef<string>('');
+  const locationRef = useRef<string>('');
 
   const NameChange = (event: ChangeEvent<HTMLInputElement>): void => {
     nameRef.current = event.target.value;
@@ -31,6 +32,10 @@ const SignUp = () => {
 
   const SecPassChange = (event: ChangeEvent<HTMLInputElement>): void => {
     secpassRef.current = event.target.value;
+  }
+
+  const LocationChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    locationRef.current = event.target.value;
   }
 
   const VerifyPassword = () => {
@@ -69,6 +74,10 @@ const SignUp = () => {
                   <option value="Needy">The Needy</option>
                   <option value="Both">In Between</option>
                 </select>
+              </div>
+              <div className="flex flex-col max-w-md space-y-5">
+                <input type="text" placeholder="Location" onChange={LocationChange}
+                  className="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal" />
               </div>
               <div className="flex flex-col max-w-md space-y-5">
                 <input type="text" placeholder="Username" onChange={UserChange}
